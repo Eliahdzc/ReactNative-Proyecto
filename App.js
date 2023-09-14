@@ -11,6 +11,8 @@ import {
 import React, { useState } from "react";
 import Modal from "./components/Modal";
 import Logo from "./components/Logo";
+import fonts from "./src/global/fonts";
+import { useFonts } from "expo-font";
 
 
 
@@ -19,6 +21,7 @@ export default function App() {
   const [itemsList, setItemsList] = useState([]);
   const [itemSelected, setItemSelected] = useState();
   const [modalVisible, setModalVisible] = useState(false);
+  const [fontsLoaded] = useFonts(fonts);
 
   const onHandleChangeItem = (text) => setTextValue(text);
 
@@ -54,6 +57,8 @@ export default function App() {
     setModalVisible(true);
     setItemSelected(index);
   };
+
+  if (!fontsLoaded) return null
 
   return (
     <View style={styles.container}>
@@ -114,12 +119,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     fontWeight: "800",
+    fontFamily: 'AbrilFatface',
   },
 
   recepies: {
     fontSize: 40,
     fontWeight: "500",
     padding: 30,
+    fontFamily: 'AbrilFatface'
   },
 
   inputContainer: {
@@ -160,5 +167,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "600",
     fontVariant: "no-common-ligatures",
+    fontFamily: 'GrandHotel',
   },
 });
