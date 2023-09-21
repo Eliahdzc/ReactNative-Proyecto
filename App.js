@@ -21,6 +21,7 @@ export default function App() {
   const [itemsList, setItemsList] = useState([]);
   const [itemSelected, setItemSelected] = useState();
   const [modalVisible, setModalVisible] = useState(false);
+  const [enviarActivado, setEnviarActivado] = useState(false);
   const [fontsLoaded] = useFonts(fonts);
 
   const onHandleChangeItem = (text) => setTextValue(text);
@@ -60,37 +61,65 @@ export default function App() {
 
   if (!fontsLoaded) return null
 
+  const clicEnviar = () => {
+    setEnviarActivado(true)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.containerLogo}>
           <Logo />
-      <View>
-        </View>
-        <Text style={styles.recepies}>
-          Recetas de postres que te gustaría recibir
-        </Text>
       </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Ingresa la Receta"
-          value={textValue}
-          onChangeText={onHandleChangeItem}
-        />
-        <Button
-          title="Agregar a mi lista"
-          color={"#646cff"}
-          borderRadius={30}
-          onPress={addItem}
-        />
-      </View>
-      <View style={styles.listContainer}>
-        <FlatList
-          data={itemsList}
-          renderItem={renderListItem}
-          keyExtractor={(item) => item.id}
-        />
-      </View>
+      {
+        enviarActivado
+        ? (
+            <View>
+              <Text style={styles.recepies}>
+                Proximamente recibiras tus recetas de
+              </Text>
+              <Text style={styles.recepies}>
+                {itemsList.map(elem => `${elem.value} `)}
+              </Text>
+            </View>
+        ) : (
+          <>
+            <View>
+              <Text style={styles.recepies}>
+                Recetas de postres que te gustaría recibir
+              </Text>
+            </View>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Ingresa la Receta"
+                value={textValue}
+                onChangeText={onHandleChangeItem}
+              />
+              <Button
+                title="Agregar a mi lista"
+                color={"#646cff"}
+                borderRadius={30}
+                onPress={addItem}
+              />
+            </View>
+            <View style={styles.containerButton}>
+              <Button
+                  title="Enviar solicitud"
+                  color={"#646c77"}
+                  borderRadius={30}
+                  onPress={clicEnviar}
+                />
+            </View>
+            <View style={styles.listContainer}>
+              <FlatList
+                data={itemsList}
+                renderItem={renderListItem}
+                keyExtractor={(item) => item.id}
+              />
+            </View>
+          </>
+        )}
+
       <Modal modalVisible={modalVisible} onHandleDelete={onHandleDelete} />
     </View>
   );
@@ -103,6 +132,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "top",
     paddingTop: 50,
+  },
+
+  containerButton: {
+    top: 20,
+    bottom: 20,
+
   },
 
   containerLogo: {
