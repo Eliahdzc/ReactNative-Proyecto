@@ -1,0 +1,1 @@
+export const baseurl = 'https://sweetangiesapp-default-rtdb.firebaseio.com/'

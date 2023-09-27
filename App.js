@@ -1,29 +1,19 @@
-// import {
-//   Button,
-//   FlatList,
-//   StyleSheet,
-//   Text,
-//   TextInput,
-//   TouchableOpacity,
-//   View,
-//   Image,
-// } from "react-native";
-import {
-  Text,
-  View
-} from "react-native";
 import React from "react";
 // import Modal from "./components/Modal";
 // import Logo from "./components/Logo";
 // import fonts from "./src/global/fonts";
 // import { useFonts } from "expo-font";
-
 import Navigator from './src/navigation/Navigator'
+import { Provider } from "react-redux";
+import store from './src/store'
 
 export const App = () => {
   return (
+    <Provider store={store}>
       <Navigator/>
-  )
-};
 
-export default App;
+    </Provider>
+  )
+}
+
+export default App
