@@ -202,8 +202,8 @@ export default  [
         titulo: "Angel Food Cupcakes",
         imagen: "../assets/pictures/cupcakes/04.jpg",
         categoria: {
-        tipo: "Cupcakes",
-        id: "cupcake-04",
+            tipo: "Cupcakes",
+            id: "cupcake-04",
         },
         descripcion: "../assets/description/cupcakes/04.png",
         precio: "850"
