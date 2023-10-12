@@ -1,5 +1,6 @@
 import { Pressable, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
+import { getAuth, createUserWithEmailAndPassword, singInWithEmailAndPassword } from 'firebase/auth';
 
 import { insertSession } from '../../db'
 import { setUser } from '../../features/auth/authSlice'
@@ -10,27 +11,29 @@ import { useLoginMutation } from '../../services/authApi'
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [triggerLogin, result] = useLoginMutation()
-  const dispatch = useDispatch()
 
-  const onSubmit = () => {
-    //console.log(email, password)
-    triggerLogin({
-      email,
-      password,
-    })
-    //console.log(result)
-    if (result.isSuccess) {
-      dispatch(setUser(result.data))
-      insertSession({
-        localId: result.data.localId,
-        email: result.data.email,
-        token: result.data.idToken,
-      })
-        .then(result => console.log(result))
-        .catch(error => console.log(error.message))
-    }
-  }
+
+  // const [triggerLogin, result] = useLoginMutation()
+  // const dispatch = useDispatch()
+
+  // const onSubmit = () => {
+  //   //console.log(email, password)
+  //   triggerLogin({
+  //     email,
+  //     password,
+  //   })
+  //   //console.log(result)
+  //   if (result.isSuccess) {
+  //     dispatch(setUser(result.data))
+  //     insertSession({
+  //       localId: result.data.localId,
+  //       email: result.data.email,
+  //       token: result.data.idToken,
+  //     })
+  //       .then(result => console.log(result))
+  //       .catch(error => console.log(error.message))
+  //   }
+  // }
 
   return (
     <View style={styles.container}>

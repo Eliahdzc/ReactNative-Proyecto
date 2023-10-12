@@ -38,6 +38,32 @@ export const MainNavigator = () =>  {
                     title: "Productos en Carrito"
                 }}
             />
+             <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    title: "Productos en Carrito"
+                }}
+            /> <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    title: "Productos en Carrito"
+            }}
+            /> <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                title: "Productos en Carrito"
+            }}
+            />
+             <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    title: "Productos en Carrito"
+                }}
+            />
         </Stack.Navigator>
     )
 }
