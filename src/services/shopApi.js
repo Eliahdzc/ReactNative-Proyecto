@@ -12,7 +12,6 @@ export const shopApi = createApi({
     }),
     getProducts: builder.query({
       query: () => {
-        console.log('entro products')
         return 'products.json'
       },
     }),
@@ -20,6 +19,13 @@ export const shopApi = createApi({
       query: category => {
         return `products.json?orderBy="tipo"&equalTo="${category}"`
     }}),
+    postOrder: builder.mutation({
+      query: ({ ...order }) => ({
+        url: 'orders.json',
+        method: 'POST',
+        body: order,
+      }),
+    }),
   }),
 })
 
@@ -27,4 +33,5 @@ export const {
   useGetCategoriesQuery,
   useGetProductsQuery,
   useGetProductsByCategoryQuery,
+  usePostOrderMutation,
 } = shopApi

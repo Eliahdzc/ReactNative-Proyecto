@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
   },
   productContainer: {
     width: '47%',
-    backgroundColor: 'grey',
+    backgroundColor: '#E0F1E9',
     marginBottom: 20,
     alignItems: 'flex-start',
     paddingVertical: 15,
@@ -28,12 +28,19 @@ export default styles = StyleSheet.create({
     height: 150,
     width: 150,
   },
+  descripcion: {
+    alignSelf: 'center',
+    height: 150,
+    width: 270,
+  },
   title: {
     fontWeight: '700',
     fontVariant: 'small-caps',
+    alignSelf: 'center',
   },
   price: {
     fontSize: 20,
     fontVariant: '',
+    alignSelf: 'center',
   },
 })

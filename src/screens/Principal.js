@@ -75,6 +75,13 @@ export const Principal = ({navigation}) => {
           onPress={() => navigation.navigate('Productos')}
         />
       </View>
+      <View>
+        <Text>Home Screen</Text>
+        <Button
+          title="Ir a Carrito"
+          onPress={() => navigation.navigate('Cart')}
+        />
+      </View>
       {enviarActivado ? (
         <View>
           <Text style={styles.recepies}>
