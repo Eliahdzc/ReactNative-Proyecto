@@ -27,6 +27,8 @@ const Cart = () => {
         </View>
         <View style={styles.buttonContainer}>
             <Pressable onPress={confirmCart}>
+            {/* onPress={() => navigation.navigate('Descripcion', {product: item})} */}
+
                 <Text style={{textAlign: 'center', color: 'black', fontSize: 36 }}>Confirm</Text>
                 <View>
                     <Text style={{textAlign: 'center', color: 'black', fontSize: 36 }}>{`Total $${total}`}</Text>

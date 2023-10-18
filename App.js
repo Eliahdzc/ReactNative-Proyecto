@@ -4,18 +4,21 @@ import React from "react";
 // import fonts from "./src/global/fonts";
 // import { useFonts } from "expo-font";
 import MainNavigator from './src/navigation/MainNavigator'
+import Login from "./src/screens/Login";
+import InitialPage from "./src/components/InitialPage/InitialPage";
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from "react-redux";
 import store from './src/store'
+
 import BottomTabNavigator from "./src/navigation/BoottonTabNavigator";
 
+
 export const App = () => {
+
   return (
     <Provider store={store}>
       <NavigationContainer>
-        {/* <MainNavigator/> */}
-        <BottomTabNavigator/>
-
+        <InitialPage />
       </NavigationContainer>
 
     </Provider>
