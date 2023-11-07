@@ -4,6 +4,8 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E0F1E9',
+    margin:10,
+    padding: 10,
   },
   listContainer: {
     flex: 4,

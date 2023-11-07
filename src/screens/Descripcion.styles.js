@@ -6,39 +6,42 @@ export default styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     backgroundColor:'#E0F1E9',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 0,
   },
   title: {
     alignSelf: 'center',
-    fontSize: 50,
+    fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: "Frederica",
   },
   imageContainer: {
-    height: '30%',
-    width: '100%',
-    padding: 20,
+    padding: 5,
   },
   image: {
     alignSelf: 'center',
-    margin: 30,
-    height: '100%',
-    width: 600,
+    margin: 10,
+    height: 200,
+    width: 200,
   },
   descripcionContainer: {
     height: '30%',
-    width: '100%',
+    width: '100%', 
+    alignContent: 'center',
   },
   descripcion: {
     alignSelf: 'center',
     margin: 0,
-    height: '100%',
+    height: '100%' ,
     width: '100%',
   },
   price: {
-    fontSize: 40,
+    fontSize: 25,
     fontWeight: 'bold',
     margin: 0,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    padding: 10,
   },
   buttonATC: {
     justifyContent: 'center',
@@ -46,8 +49,9 @@ export default styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#C5E3AC',
     marginBottom: 30,
-    height: 80,
-    width: '50%'
+    height: 50,
+    width: '50%',
+    padding: 10,
   }
 })
 

@@ -5,7 +5,7 @@ import dataProducts from '../../data/products'
 const initialState = {
     categories: dataCategories,
     products: dataProducts,
-    productsFilteredByCategory: [],
+    productsFilteredByTipo: [],
     categorySelected: null,
     productIdSelected: null,
 }
@@ -15,10 +15,10 @@ export const shopSlice = createSlice({
     initialState,
     reducers: {
         setCategorySelected: (state, action) => {
-        state.categorySelected = action.payload
+            state.categorySelected = action.payload
         },
         setProductIdSelected: (state, action) => {
-        state.productIdSelected = action.payload
+            state.productIdSelected = action.payload
         },
     },
 })

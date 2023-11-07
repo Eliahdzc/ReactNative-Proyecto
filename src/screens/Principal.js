@@ -1,18 +1,19 @@
 import {
   Button,
   FlatList,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  Image,
 } from "react-native";
 import React, { useState } from "react";
 import Modal from "../../components/Modal";
 import Logo from "../../components/Logo";
 import fonts from "../global/fonts";
 import { useFonts } from "expo-font";
+import { useSelector } from 'react-redux'
+import styles from './Principal.styles.js'
+
 
 export const Principal = ({navigation}) => {
   const [textValue, setTextValue] = useState("");
@@ -21,6 +22,8 @@ export const Principal = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [enviarActivado, setEnviarActivado] = useState(false);
   const [fontsLoaded] = useFonts(fonts);
+  const userName = useSelector(state => state.auth.userName)
+
 
   const onHandleChangeItem = (text) => setTextValue(text);
 
@@ -69,25 +72,14 @@ export const Principal = ({navigation}) => {
         <Logo />
       </View>
       <View>
-        <Text>Home Screen</Text>
-        <Button
-          title="Ir a Productos"
-          onPress={() => navigation.navigate('Productos')}
-        />
-      </View>
-      <View>
-        <Text>Home Screen</Text>
-        <Button
-          title="Ir a Carrito"
-          onPress={() => navigation.navigate('Cart')}
-        />
+        <Text style={styles.recepies}>Hola {userName}</Text>
       </View>
       {enviarActivado ? (
         <View>
           <Text style={styles.recepies}>
             Proximamente recibiras tus recetas de
           </Text>
-          <Text style={styles.recepies}>
+          <Text style={styles.textList}>
             {itemsList.map((elem) => `${elem.value} `)}
           </Text>
         </View>
@@ -95,7 +87,7 @@ export const Principal = ({navigation}) => {
         <>
           <View>
             <Text style={styles.recepies}>
-              Recetas de postres que te gustaría recibir
+              Recetas que te gustaría recibir
             </Text>
           </View>
           <View style={styles.inputContainer}>
@@ -106,7 +98,7 @@ export const Principal = ({navigation}) => {
               onChangeText={onHandleChangeItem}
             />
             <Button
-              title="Agregar a mi lista"
+              title="Agregar"
               color={"#646cff"}
               borderRadius={30}
               onPress={addItem}
@@ -114,8 +106,8 @@ export const Principal = ({navigation}) => {
           </View>
           <View style={styles.containerButton}>
             <Button
-              title="Enviar solicitud"
-              color={"#646c77"}
+              title="Enviar"
+              color={"#646cff"}
               borderRadius={30}
               onPress={clicEnviar}
             />
@@ -137,82 +129,3 @@ export const Principal = ({navigation}) => {
 
 export default Principal;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#E0F1E9",
-    alignItems: "center",
-    justifyContent: "top",
-    paddingTop: 50,
-  },
-
-  containerButton: {
-    top: 20,
-    bottom: 20,
-  },
-
-  containerLogo: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 50,
-  },
-
-  logo: {
-    width: 200,
-    height: 200,
-  },
-
-  title: {
-    fontSize: 50,
-    fontWeight: "800",
-    fontFamily: "AbrilFatface",
-  },
-
-  recepies: {
-    fontSize: 40,
-    fontWeight: "500",
-    padding: 30,
-    fontFamily: "AbrilFatface",
-  },
-
-  inputContainer: {
-    borderRadius: 10,
-    alignItems: "center",
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    justifyContent: "space-between",
-  },
-  input: {
-    width: 200,
-    height: 50,
-    fontSize: 17,
-    paddingLeft: 10,
-    borderRadius: 20,
-  },
-  listContainer: {
-    marginTop: 25,
-  },
-  itemContainer: {
-    height: 40,
-    width: 150,
-    marginVertical: 8,
-    marginHorizontal: 5,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#646cff",
-    shadowColor: "#646cff",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  textItem: {
-    fontSize: 18,
-    paddingLeft: 15,
-    color: "#fff",
-    fontWeight: "600",
-    fontVariant: "no-common-ligatures",
-    fontFamily: "GrandHotel",
-  },
-});

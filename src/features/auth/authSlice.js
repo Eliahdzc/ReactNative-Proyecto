@@ -5,6 +5,7 @@ const initialState = {
   token: null,
   localId: null,
   imageCamera: null,
+  userName: null,
 }
 
 export const authSlice = createSlice({
@@ -19,6 +20,7 @@ export const authSlice = createSlice({
           user: action.payload.email,
           token: action.payload.idToken,
           localId: action.payload.localId,
+          userName: action.payload.userName
         },
       )
     },

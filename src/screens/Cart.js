@@ -4,18 +4,28 @@ import React, { useEffect } from 'react'
 import CartItem from '../components/CartItem'
 import styles from './Cart.styles'
 import { usePostOrderMutation } from '../services/shopApi'
-import { useSelector } from 'react-redux'
+import { clearCart } from '../features/cart/cartSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
-const Cart = () => {
+const Cart = ({navigation}) => {
     const cart = useSelector(state => state.cart.items)
-    const {total} = useSelector(state => state.cart)
+    const total = useSelector(state => state.cart.total)
     const [triggerPost, result] = usePostOrderMutation()
+    const dispatch = useDispatch()
 
     const renderItem = ({ item }) => <CartItem item={item} />
 
-    const confirmCart = () => {
-        triggerPost({ total, cart, user: 'LoggedUser' })
+    const confirmCart = async () => {
+        try{
+            const orderNumber = await triggerPost({ total, cart, user: 'LoggedUser' }).unwrap()
+            console.log('good', orderNumber)
+            dispatch(clearCart())
+            navigation.navigate('Pedidos', {orderId: orderNumber.name})
+        } catch(error) {
+            console.log('error', error)
+        }
     }
+
     return (
         <View style={styles.container}>
         <View style={styles.listContainer}>
@@ -27,11 +37,9 @@ const Cart = () => {
         </View>
         <View style={styles.buttonContainer}>
             <Pressable onPress={confirmCart}>
-            {/* onPress={() => navigation.navigate('Descripcion', {product: item})} */}
-
-                <Text style={{textAlign: 'center', color: 'black', fontSize: 36 }}>Confirm</Text>
+                <Text style={{textAlign: 'center', color: 'black', fontSize: 20 }}>Confirmar</Text>
                 <View>
-                    <Text style={{textAlign: 'center', color: 'black', fontSize: 36 }}>{`Total $${total}`}</Text>
+                    <Text style={{textAlign: 'center', color: 'black', fontSize: 20 }}>{`Total $${total}`}</Text>
                 </View>
             </Pressable>
         </View>

@@ -16,6 +16,7 @@ import Principal from './Principal.js'
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [userName, setUserName] = useState('')
   const dispatch = useDispatch()
 
 
@@ -30,7 +31,8 @@ const Login = () => {
       dispatch(setUser({
         email: res['email'],
         idToken: res.stsTokenManager,
-        localId: res.uid
+        localId: res.uid,
+        userName
       }))
     })
     .catch((error) => {
@@ -47,7 +49,8 @@ const Login = () => {
       dispatch(setUser({
         email: res.user['email'],
         idToken: res["_tokenResponse"].idToken,
-        localId: res.user.uid
+        localId: res.user.uid,
+        userName
       }))
       // navigation.navigate('Principal')
 
@@ -58,33 +61,28 @@ const Login = () => {
     })
   }
 
+  const usuario = () => {
+    nombreDeUsuario(userName)
+    .then((res) => {
+      console.log('nombre', res);
+    })
+    .catch((error) => {
+      console.log('ese nombre no le gusta', error)
+  })
+}
 
-  // const [triggerLogin, result] = useLoginMutation()
-  // const dispatch = useDispatch()
 
-  // const onSubmit = () => {
-  //   //console.log(email, password)
-  //   triggerLogin({
-  //     email,
-  //     password,
-  //   })
-  //   //console.log(result)
-  //   if (result.isSuccess) {
-  //     dispatch(setUser(result.data))
-  //     insertSession({
-  //       localId: result.data.localId,
-  //       email: result.data.email,
-  //       token: result.data.idToken,
-  //     })
-  //       .then(result => console.log(result))
-  //       .catch(error => console.log(error.message))
-  //   }
-  // }
-
+ 
   return (
     <View style={styles.container}>
       <View style={styles.loginContainer}>
-        <Text>Login to start</Text>
+        <Text style={styles.texto}>Inicia sesión</Text>
+        <TextInput
+          style={styles.inputEmail}
+          value={userName}
+          placeholder="Ingresa tu nombre de usuario"
+          onChangeText={(text) => setUserName(text)}
+        />
         <TextInput
           style={styles.inputEmail}
           value={email}
@@ -100,7 +98,7 @@ const Login = () => {
         <TouchableOpacity style={styles.loginButton} onPress={handleSignIn}>
           <Text style={{ color: 'white' }}>Login</Text>
         </TouchableOpacity>
-        <Text>No have an account?</Text>
+        <Text style={styles.texto}>Nuevo Registro</Text>
         <TouchableOpacity
           style={styles.loginButton}
           onPress={handleCreateAccount}

@@ -5,7 +5,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#C5E3AC',
+    backgroundColor: '#E0F1E9',
   },
   loginContainer: {
     width: '100%',
@@ -14,18 +14,18 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputEmail: {
-    width: '60%',
+    width: '70%',
     backgroundColor: '#FAFAFA',
     borderRadius: 10,
-    height: 120,
+    height: 50,
     marginVertical: 15,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 8,
-    fontSize: 20
+    fontSize: 15
   },
   loginButton: {
-    backgroundColor: '#55535C',
+    backgroundColor: '#646cff',
     width: '30%',
     height: 50,
     borderRadius: 10,
@@ -33,4 +33,8 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  texto: {
+    padding: 10,
+    fontSize: 18,
+  }
 })

@@ -8,13 +8,31 @@ import Feather from '@expo/vector-icons/Feather'
 
 import Principal from '../screens/Principal';
 import Productos from '../screens/Productos';
+import Orders from '../screens/Orders';
 import Descripcion from '../screens/Descripcion';
+import Categorias from '../screens/Categorias';
+import Profile from '../screens/Profile';
 import Cart from '../screens/Cart';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
 
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const BottomTab = createBottomTabNavigator()
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+    return(
+        <Drawer.Navigator>
+            <Drawer.Screen name="Inicio" component={Principal} />
+            <Drawer.Screen name="Productos" component={Categorias} />
+            <Drawer.Screen name="Carrito" component={Cart} />
+            <Drawer.Screen name="Pedidos" component={Orders} />
+            <Drawer.Screen name="Profile" component={Profile} />
+        </Drawer.Navigator>
+    )
+}
 
 function BottomTabNavigator() {
     return (
@@ -27,10 +45,22 @@ function BottomTabNavigator() {
             }}
         >
             <BottomTab.Screen
+                name='Home'
+                component={DrawerNavigator}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={focused ? styles.iconContainer : null}>
+                            <Feather name="home" size={24} color={'#FFFFFF'} />
+                        </View>
+                    ),
+                    }}
+            />
+            <BottomTab.Screen
                 name="Inicio"
                 component={Principal}
                 options={{
                 tabBarIcon: ({ focused }) => (
+
                     <View style={focused ? styles.iconContainer : null}>
                         <Feather name="shopping-bag" size={24} color={'#FFFFFF'} />
                     </View>
@@ -49,7 +79,7 @@ function BottomTabNavigator() {
                 }}
             />
             <BottomTab.Screen
-                name="Productos"
+                name="ProductosPorCategoria"
                 component={Productos}
                 options={{
                 tabBarIcon: ({ focused }) => (

@@ -13,8 +13,6 @@ export const cartSlice = createSlice({
     reducers: {
         //Agregar elemento al carrito
         addItem: (state, action) => {
-            // console.log('action', action)
-            // console.log('state', state)
             const productRepeated = state.items.find(
                 item => item.id === action.payload.id
             )
@@ -27,7 +25,6 @@ export const cartSlice = createSlice({
                     if (item.id === action.payload.id) {
                         item.quantity += action.payload.quantity
                     }
-                    console.log('item', item)
                     return item
                 })
                 console.log('itemsUpdated', itemsUpdated)
@@ -35,7 +32,6 @@ export const cartSlice = createSlice({
                     (acc, current) => (acc += current.precio * current.quantity),
                     0
                 )
-                console.log('repeattotal', repeatTotal)
 
                 const newState = Object.assign(
                     state,
@@ -68,10 +64,31 @@ export const cartSlice = createSlice({
 
             }
         },
-        removeItem: (state, action) => {},
+
+        removeItem: (state, action) => {
+            const item = action.payload.item
+            const items = [...state.items]
+            console.log('items >>>', items)
+            const indexToDelete = items.findIndex(elem => elem.categoria.id === item.categoria.id)
+            items.splice(indexToDelete, 1)
+            const totalDelete = items.reduce(
+                (acc, current) => (acc += current.precio * current.quantity),
+                0
+            )
+
+            return {
+                ...state,
+                items: items,
+                total: totalDelete,
+            }
+        },
+
+        clearCart: () => {
+            return initialState
+        }
     },
 })
 
-export const { addItem, removeItem } = cartSlice.actions
+export const { addItem, removeItem, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer

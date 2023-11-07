@@ -8,11 +8,12 @@ export default styles = StyleSheet.create({
     backgroundColor: '#C5E3AC',
   },
   name: {
-    fontSize: 30,
+    fontSize: 15,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
   },
   details: {
     flex: 1,

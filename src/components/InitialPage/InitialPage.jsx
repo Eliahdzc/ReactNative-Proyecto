@@ -10,8 +10,8 @@ const InitialPage = () => {
   return (
     <>
       {isLoggedIn ?
-        <BottomTabNavigator /> :
-        <Login />
+        <BottomTabNavigator />
+        : <Login />
       }
     </>
   )

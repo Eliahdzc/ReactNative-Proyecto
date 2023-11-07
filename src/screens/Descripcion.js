@@ -4,8 +4,7 @@ import { addItem } from '../features/cart/cartSlice'
 import styles from './Descripcion.styles'
 import { useDispatch, useSelector } from 'react-redux'
 
-const Descripcion = ({ route }) => {
-    console.log('route .....', route)
+const Descripcion = ({navigation, route }) => {
     let product = {};
     if (route.params) {
         product = route.params.product;
@@ -42,9 +41,13 @@ const Descripcion = ({ route }) => {
                     <Text style={styles.price}>Precio {`$ ${product.precio}`}</Text>
                     <Pressable
                         style={styles.buttonATC}
-                        onPress={handleAddToCart}
+                        onPress={() => {
+                            handleAddToCart();
+                            navigation.navigate('Productos')
+                        }}
                     >
-                        <Text style={{textAlign: 'center', color: 'black', fontSize: 36 }}>Agregar al carrito</Text>
+                        <Text style={{textAlign: 'center', color: 'black', fontSize: 20 }}>Agregar al carrito</Text>
+
                     </Pressable>
                 </>
                 :   <View  style={{...styles.container, backgroundColor: '#EDEDED', width: '100%'}}>
@@ -57,12 +60,3 @@ const Descripcion = ({ route }) => {
 
 export default Descripcion;
 
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: "#E0F1E9",
-//         alignItems: "center",
-//         justifyContent: "top",
-//         paddingTop: 50,
-//     }
-// });

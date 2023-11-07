@@ -1,13 +1,28 @@
-import {Text, View, Button, FlatList, TouchableOpacity, Image} from "react-native";
+import {Text, View, FlatList, TouchableOpacity, Image} from "react-native";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { useEffect, useState } from 'react'
+import { useGetProductsQuery } from '../services/shopApi.js';
+import { useSelector } from 'react-redux'
 import styles from './Productos.styles.js'
-import { useGetProductsQuery } from '../services/shopApi.js'
-// import fonts from "../global/fonts";
-// import { useFonts } from "expo-font";
 
-export const Productos = ({navigation}) => {
+
+export const Productos = ({navigation, route}) => {
+    // El valor default de categoria es Pasteles
+    let categoria = 'Pasteles'
+    if (route.params) {
+        categoria = route.params.category;
+    }
+
+    const [products, setProducts] = useState([])
     const { data, isLoading } = useGetProductsQuery();
+
+    useEffect(() => {
+        const datosFiltradosPorCategoria = data?.filter(elem => elem.categoria.tipo === categoria)
+        setProducts(datosFiltradosPorCategoria)
+    }, [categoria, data])
+
+
+    const userName = useSelector(state => state.auth.userName)
     const returningImage = (item) => {
         return (
             <Image
@@ -27,45 +42,31 @@ export const Productos = ({navigation}) => {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Productos</Text>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Puedes iniciar tu compra {userName}</Text>
 
             <View style={styles.listContainer}>
+
                 <FlatList
-                    data={data}
+                    data={products}
                     numColumns={2}
                     columnWrapperStyle={styles.weapperStyle}
                     renderItem={({ item }) => (
                         <TouchableOpacity
                             style={styles.productContainer}
-                            onPress={() => navigation.navigate('Descripcion', {product: item})}
+                            onPress={() => navigation.navigate('Descripcion', { product: item })}
                         >
                             {returningImage(item)}
-                            {returningDescripcion(item)}
+                            {/* {returningDescripcion(item)} */}
                             <Text style={styles.title}>{item.titulo}</Text>
                             <Text style={styles.price}>{`$${item.precio}`}</Text>
                         </TouchableOpacity>
                     )}
-                    keyExtractor={item => item.id}
+                    keyExtractor={(item, index) => `prod-${index}`}
                 />
             </View>
-
-            <Button
-                title="Ir a Principal"
-                onPress={() => navigation.navigate('Principal')}
-            />
         </View>
     )
 };
 
 export default Productos;
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: "#E0F1E9",
-//         alignItems: "center",
-//         justifyContent: "top",
-//         paddingTop: 50,
-//     }
-// });
